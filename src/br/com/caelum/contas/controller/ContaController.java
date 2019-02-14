@@ -41,4 +41,30 @@ public class ContaController {
 		return mv;
 	}
 
+	@RequestMapping("/removeConta")
+	public String remove(Conta conta) {
+
+		new ContaDAO().remove(conta);
+
+		// redirect: redirecionamento lado do cliente (a url vai ficar com /listaContas)
+		// forward: redirecionamento pelo lado do servidor (u url fica /removeConta?id=x
+		return "redirect:listaContas";
+
+	}
+
+	@RequestMapping("/mostraConta")
+	public ModelAndView mostra(Long id) {
+
+		return new ModelAndView("conta/mostra").addObject("conta", new ContaDAO().buscaPorId(id));
+
+	}
+
+	@RequestMapping("/alteraConta")
+	public String altera(Conta conta) {
+
+		new ContaDAO().altera(conta);
+
+		return "redirect:listaContas";
+	}
+
 }

@@ -2,18 +2,22 @@ package br.com.caelum.contas.modelo;
 
 import java.util.Calendar;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Conta {
-	
+
 	private Long id;
 
 	private String descricao;
 
 	private boolean paga;
-	
+
 	private double valor;
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy") // Para o Spring MVC saber converter automaticamente a data no formato
+											// brasileiro para um Calendar
 	private Calendar dataPagamento;
-	
+
 	private TipoDaConta tipo;
 
 	public Long getId() {
@@ -58,8 +62,8 @@ public class Conta {
 
 	public double getValor() {
 		return valor;
-	}	
-	
+	}
+
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
