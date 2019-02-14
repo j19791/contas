@@ -2,7 +2,10 @@ package br.com.caelum.contas.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +16,17 @@ import br.com.caelum.contas.modelo.Conta;
 public class ContaController {
 
 	@RequestMapping("/adicionaConta")
-	public String adiciona(Conta conta) {// action
+	public String adiciona(@Valid Conta conta, BindingResult result) {// action. @Valid avisa ao Spring p/ utilizar os
+																		// beans validations. BindingResult: Spring nos
+																		// avisará se houve um erro de validação, e nos
+																		// deixará livres para tratarmos do jeito que
+																		// quisermos.
+
+		if (result.hasErrors()) {// se tiver erro, retorna p/ form. //result.hasFieldErrors("descricao") mais
+									// especifico
+			return "conta/formulario";
+		}
+
 		ContaDAO dao = new ContaDAO();
 
 		dao.adiciona(conta);
