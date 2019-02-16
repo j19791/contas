@@ -24,6 +24,11 @@ function pagaAgora(id) {
 
 
 <body>
+
+<a href="logout">Logout</a>
+<br>
+Bem Vindo ${usuario.login}
+
     <table style="height: 10px; width: 775px;" border="1">
         <tr>
         <th>Código</th>

@@ -5,22 +5,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+//nao esquecer de configurar o spring-context.xml 
+/*<mvc:interceptors>
+	<bean class="br.com.caelum.contas.interceptor.AutorizadorInterceptor" />
+</mvc:interceptors>*/
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller)
-	throws Exception {
-		
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller) throws Exception {
+
 		String uri = request.getRequestURI();
-		if(uri.endsWith("loginForm") || uri.endsWith("efetuaLogin") || uri.contains("resources")) {
+		if (uri.endsWith("loginForm") || uri.endsWith("efetuaLogin") || uri.contains("resources")) {
 			return true;
 		}
-		
-		if(request.getSession().getAttribute("usuarioLogado")!=null) {
+
+		if (request.getSession().getAttribute("usuarioLogado") != null) {
 			return true;
 		} else {
 			response.sendRedirect("loginForm");
 			return false;
 		}
-		
+
 	}
 }
