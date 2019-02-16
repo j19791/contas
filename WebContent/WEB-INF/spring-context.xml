@@ -11,6 +11,8 @@
 						
 	<context:component-scan base-package="br.com.caelum.contas" />
 	<mvc:annotation-driven />
+	
+	<mvc:default-servlet-handler/><!-- O Spring responde toda requisição que chegar pra ele. Algumas delas não tem o que fazer, como é o caso da requisição que o browser fará para pegar o arquivo jquery.js. Clocarmos todos esses arquivos que devem apenas serem "servidos" dentro do diretório WebContent/resources -->
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
